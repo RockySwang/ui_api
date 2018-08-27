@@ -7,6 +7,9 @@ Stack:
 Prepare:  
 1,IDEA 2,   
 
-//function point   
-Spring controller Junit -    
+//knowlege point   
+1，Spring controller Junit - test Mock   
+2，datasource config    
+
+
 RestTemplate -   
