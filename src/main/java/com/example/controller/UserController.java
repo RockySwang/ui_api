@@ -19,6 +19,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.additional.context.Context;
+import com.additional.context.ContextHolder;
+import com.example.model.JobUserDTO;
+import com.example.model.User;
+import com.example.model.UserVO;
+import com.example.service.IUserService;
+
 /**
  * User Config Controller
  * 
@@ -28,7 +35,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/users")
-@SwaggerAnnotated
+//@SwaggerAnnotated
 public class UserController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
@@ -40,7 +47,7 @@ public class UserController {
 	@ResponseBody
 	@Produces({ MediaType.APPLICATION_JSON })
 	@RequestMapping(value="", method = RequestMethod.GET)
-	@AdminPrivilegeRequired
+	//@AdminPrivilegeRequired
 	public List<JobUserDTO> userInfoList(String requestId){
 		List<JobUserDTO> userList = new ArrayList<JobUserDTO>();
 		
@@ -58,7 +65,7 @@ public class UserController {
 	@Produces({ MediaType.APPLICATION_JSON }) 
 	@Consumes(MediaType.APPLICATION_JSON)
 	@RequestMapping(value="/{userName}",  method = RequestMethod.PATCH)
-	@AdminPrivilegeRequired
+	//@AdminPrivilegeRequired
 	public Boolean switchRole(@PathVariable String userName){
 		Long userId = userService.fetchUserId(userName);
 		int count = userService.switchRoleToAdmin(userId);
@@ -76,6 +83,7 @@ public class UserController {
 	@RequestMapping(value="/currentProfile", method = RequestMethod.GET)
 	public UserVO getUserProfile(HttpServletRequest request){
 		UserVO userVO= new UserVO();
+		//Fetch the current user context from request information.
 		Context context= ContextHolder.getContext();
 		userVO.setUserId(context.getUserId().toString());
 		userVO.setUserEmail(context.getUserEmail());
@@ -93,8 +101,8 @@ public class UserController {
 		User user=userService.getUser(userName);
 		if(user!=null)
 		{
-			UserSessionHelper.setUserInfo(request,user.getEmail(),user.getUsername());
-			HeaderHelper.setUserInfoIntoHeader(response,user.getUsername(),user.getEmail());
+			//UserSessionHelper.setUserInfo(request,user.getEmail(),user.getUsername());
+			//HeaderHelper.setUserInfoIntoHeader(response,user.getUsername(),user.getEmail());
 		}
 		else
 		{
