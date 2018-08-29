@@ -1,5 +1,6 @@
 package com.example.impl;
 
+/*Java 中的双重检查（Double-Check）double check*/
 class Singleton{
 	private volatile static Singleton instance = null;
 	private Singleton() {}
