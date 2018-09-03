@@ -4,3 +4,4 @@ package com.example.impl;
 public class SingleTon2 {
 
 }
+
